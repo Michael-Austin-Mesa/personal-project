@@ -56,7 +56,7 @@ My initial hypothesis is that drivers of volume will likely be the price of BitC
 
 # Steps to Reproduce
 1. Clone this repo
-2. Acquire the data from SQL database
+2. Acquire the data from messari.io api
 3. Place data in file containing the cloned repo
 4. Run notebook
 
