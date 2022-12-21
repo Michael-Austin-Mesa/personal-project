@@ -13,6 +13,9 @@ from sklearn.model_selection import TimeSeriesSplit
 
 
 def get_crypto_price(symbol, start, end):
+    ''' This function returns a dataframe from messari.io api 
+        filled with information on BitCoin.
+    '''
     
     api_url = f'https://data.messari.io/api/v1/markets/binance-{symbol}-usdt/metrics/price/time-series?start={start}&end={end}&interval=1d'
     raw = requests.get(api_url).json()
@@ -28,6 +31,9 @@ def get_crypto_price(symbol, start, end):
 
 
 def clean_btc_data_2022(btc):
+    ''' This function adds dates and fills in nulls via .ffill()
+        to the end of the dataframe.
+    '''
     
     df = btc['2022']
     df = df.reset_index()
@@ -43,6 +49,10 @@ def clean_btc_data_2022(btc):
 
 
 def clean_btc_data_2021(btc):
+    ''' This functions adds missing dates from 2021
+        and fills in nulls via .bfill()
+    
+    '''
     
     df = btc['2021'].resample('D').mean()
     df = df.groupby(df.index.day).bfill()
@@ -56,6 +66,8 @@ def clean_btc_data_2021(btc):
 
 
 def remove_leap_day(btc):
+    ''' This function removes leap day from 2020
+    '''
     
     btc = btc[btc.index != '2020-02-29']
     
@@ -66,7 +78,9 @@ def remove_leap_day(btc):
 
 
 def clean_data(btc):
-    
+    ''' This function runs all function in the py file
+        that cleans the data from mesari.io
+    '''
     btc = remove_leap_day(btc)
     btc = clean_btc_data_2021(btc)
     btc = clean_btc_data_2022(btc)
