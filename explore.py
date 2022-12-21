@@ -59,6 +59,10 @@ y = train.btc_volume
 
 
 def get_avg_vol_monthly():
+    ''' This function returns a plot of the
+        average monthly volume of BitCoin 
+        in the train data
+    '''
     sns.set(rc={'figure.figsize': (10, 6)})
     sns.set_theme(style="whitegrid")
     ax = y.groupby([y.index.year, y.index.month]).mean().unstack(0).plot()
@@ -71,6 +75,9 @@ def get_avg_vol_monthly():
 
 
 def get_vol_by_date():
+    ''' This function returns a plot of BitCoin
+        volume by date day
+    '''
     sns.set(rc={'figure.figsize': (10, 6)})
     sns.set_theme(style="whitegrid")
     y.groupby([y.index.year]).plot(title= 'Volume by Date', xlabel='Date (Day)', ylabel = 'Volume', legend=True)
@@ -81,6 +88,9 @@ def get_vol_by_date():
 
 
 def plot_price_vol():
+    ''' This function returns scatter plots of
+        the price features against volume
+    '''
     sns.set(rc={'figure.figsize': (10, 6)})
     sns.set_theme(style="whitegrid")
     plot_df = train[['btc_open', 'btc_close','btc_high','btc_low']]
